@@ -11,6 +11,6 @@ interface State {
 
 export default class Header extends Component<Props, State> {
   render() {
-    return <div>{this.props.name}</div>;
+    return <div className="header">{this.props.name}</div>;
   }
 }
