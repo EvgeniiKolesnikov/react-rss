@@ -3,8 +3,8 @@ import { render, screen } from '@testing-library/react';
 import Header from './Header';
 
 test('renders Header AboutUs', () => {
-  render(<Header name="AboutUs" />);
-  const linkElement = screen.getByText(/AboutUs/i);
+  render(<Header name="About Us" />);
+  const linkElement = screen.getByText(/About Us/i);
   expect(linkElement).toBeInTheDocument();
 });
 
