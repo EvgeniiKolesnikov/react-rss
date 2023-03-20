@@ -9,7 +9,7 @@ interface State {
 export default class NavMenu extends Component<Record<string, never>, State> {
   render() {
     return (
-      <nav className="nav-menu">
+      <nav className="nav-menu" role="navigation">
         <ol className="nav-menu__list">
           <li className="nav-menu__item">
             <Link className="nav-menu__link" to="./">
