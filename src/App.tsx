@@ -3,11 +3,13 @@ import { AboutUs, Home, Page404 } from 'pages';
 import { BrowserRouter } from 'react-router-dom';
 import { Navigate, Route, Routes } from 'react-router';
 import './App.scss';
+import NavMenu from 'components/NavMenu/NavMenu';
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
+        <NavMenu />
         <Routes>
           <Route path="/aboutus" element={<AboutUs />} />
           <Route path="/" element={<Home />} />
