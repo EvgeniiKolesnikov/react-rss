@@ -60,7 +60,9 @@
   "jest": {
     "collectCoverageFrom": [
       "src/**/*.{js,ts,jsx,tsx}",
-      "!src/index.tsx"
+      "!src/index.tsx",
+      "!src/react-app-env.d.ts",
+      "!src/**/index.ts"
     ]
   }
 }
