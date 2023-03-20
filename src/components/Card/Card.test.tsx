@@ -9,7 +9,7 @@ describe('Card component', () => {
       render(
         <Card img={card.img} id={card.id} price={card.price} brand={card.brand} desc={card.desc} />
       );
-      const image = screen.getByAltText(card.img);
+      const image = screen.getByAltText(`card image ${card.id}`);
       expect(image).toHaveAttribute('src', card.img);
     });
   });
