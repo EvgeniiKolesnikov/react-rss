@@ -31,7 +31,13 @@ export default class SearchBar extends Component<Props, State> {
   render() {
     return (
       <>
-        <input onChange={this.onChange} type="text" value={this.state?.value || ''} />
+        <input
+          className="search-bar"
+          onChange={this.onChange}
+          type="text"
+          value={this.state?.value || ''}
+          placeholder="Search..."
+        />
       </>
     );
   }
