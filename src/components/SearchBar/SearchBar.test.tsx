@@ -8,4 +8,10 @@ describe('SearchBar component', () => {
     const linkElement = screen.getByPlaceholderText(/Search.../i);
     expect(linkElement).toBeInTheDocument();
   });
+
+  it('SearchBar title', () => {
+    render(<SearchBar />);
+    const linkElement = screen.getByTitle('search-bar');
+    expect(linkElement).toBeInTheDocument();
+  });
 });

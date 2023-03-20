@@ -37,6 +37,7 @@ export default class SearchBar extends Component<Props, State> {
           type="text"
           value={this.state?.value || ''}
           placeholder="Search..."
+          title="search-bar"
         />
       </>
     );
