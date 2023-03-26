@@ -55,4 +55,15 @@
 
 .form__cards {
   display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.form__card {
+  width: 200px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid gainsboro;
 }

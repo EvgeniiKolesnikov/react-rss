@@ -2,9 +2,9 @@ import Header from 'components/Header/Header';
 import React, { Component } from 'react';
 import './Form.scss';
 
-type CardType = {
+export type FormCardType = {
   name: string;
-  date?: Date;
+  date: string;
 };
 
 interface Props {
@@ -12,7 +12,7 @@ interface Props {
 }
 
 interface State {
-  cards: CardType[];
+  cards: FormCardType[];
 }
 
 export default class Form extends Component<Props, State> {
@@ -44,8 +44,8 @@ export default class Form extends Component<Props, State> {
     const formElem = e.target as HTMLFormElement;
 
     console.log('Name: ' + this.nameInput.current?.value);
-    const cardName = this.nameInput.current?.value;
-    const newCard: CardType = { name: cardName || 'Www' };
+    const cardName = this.nameInput.current!.value;
+    const newCard: FormCardType = { name: cardName, date: this.dateInput.current!.value };
 
     this.setState((state) => ({
       cards: [...state.cards, newCard],
@@ -143,9 +143,10 @@ export default class Form extends Component<Props, State> {
         </form>
 
         <div className="form__cards">
-          {this.state.cards.map((card: CardType, i: number) => (
+          {this.state.cards.map((card: FormCardType, i: number) => (
             <div key={i} className="form__card">
-              <div className="card__name">{card.name}</div>
+              <div className="form__card-item">Name: {card.name}</div>
+              <div className="form__card-item">Date: {card.date}</div>
             </div>
           ))}
         </div>
