@@ -16,6 +16,11 @@ export default class NavMenu extends Component<Record<string, never>, State> {
               Home
             </Link>
           </li>
+          <li className="nav-menu__item">
+            <Link className="nav-menu__link" to="./form">
+              Form
+            </Link>
+          </li>
           <li>
             <Link className="nav-menu__link" to="./aboutus">
               About Us
