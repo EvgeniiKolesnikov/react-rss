@@ -1,0 +1,58 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+
+  margin: 10px 30px;
+
+  color: rgb(91, 91, 91);
+}
+
+.form__label {
+  margin-right: 10px;
+
+  color: rgb(91, 91, 91);
+
+  font-size: 20px;
+}
+
+.form__input,
+.form__select {
+  padding: 5px;
+
+  border: 1px solid gray;
+  border-radius: 5px;
+
+  color: rgb(91, 91, 91);
+  font-size: 20px;
+  outline: none;
+  &::placeholder {
+    font-size: 15px;
+    color: rgb(164, 164, 164);
+  }
+}
+
+.form__radio {
+  margin: 0 5px;
+}
+
+.form__submit {
+  padding: 5px;
+
+  border: 1px solid gray;
+  border-radius: 5px;
+
+  color: rgb(91, 91, 91);
+  font-size: 20px;
+  outline: none;
+  cursor: pointer;
+  &:hover {
+    color: rgb(120, 120, 120);
+    background-color: #fff;
+  }
+}
+
+.form__cards {
+  display: flex;
+}
