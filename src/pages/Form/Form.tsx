@@ -43,15 +43,14 @@ export default class Form extends Component<Props, State> {
     e.preventDefault();
     const formElem = e.target as HTMLFormElement;
 
-    console.log('Name: ' + this.nameInput.current?.value);
-    const cardName = this.nameInput.current!.value;
-    const newCard: FormCardType = { name: cardName, date: this.dateInput.current!.value };
+    const newCard: FormCardType = {
+      name: this.nameInput.current!.value,
+      date: this.dateInput.current!.value,
+    };
 
     this.setState((state) => ({
       cards: [...state.cards, newCard],
     }));
-
-    console.log(this.state);
 
     formElem.reset();
   }
