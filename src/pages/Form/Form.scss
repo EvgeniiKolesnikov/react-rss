@@ -16,6 +16,11 @@
 
   font-size: 20px;
 }
+.form__label-error {
+  display: block;
+  color: red;
+  font-size: 12px;
+}
 
 .form__input,
 .form__select {
@@ -24,7 +29,7 @@
   border: 1px solid gray;
   border-radius: 5px;
 
-  color: rgb(91, 91, 91);
+  color: rgb(139, 139, 139);
   font-size: 20px;
   outline: none;
   &::placeholder {
@@ -48,7 +53,7 @@
   outline: none;
   cursor: pointer;
   &:hover {
-    color: rgb(120, 120, 120);
+    color: rgb(155, 155, 155);
     background-color: #fff;
   }
 }

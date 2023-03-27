@@ -7,7 +7,7 @@ export type FormCardType = {
   pet: string;
   assent: boolean;
   gender: string;
-  img: string;
+  img: string | null;
 };
 
 export default class FormCard extends Component<FormCardType> {
@@ -22,7 +22,7 @@ export default class FormCard extends Component<FormCardType> {
         <div className="form__card-item">Pet: {this.props.pet}</div>
         <div className="form__card-item">Assent: {this.props.assent ? 'Yes' : 'No'}</div>
         <div className="form__card-item">Gender: {this.props.gender}</div>
-        <img className="form__card-img" src={this.props.img} alt="card-image" />
+        {this.props.img && <img className="form__card-img" src={this.props.img} alt="card-image" />}
       </div>
     );
   }

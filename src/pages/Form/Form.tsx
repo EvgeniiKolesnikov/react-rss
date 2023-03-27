@@ -4,12 +4,22 @@ import Header from 'components/Header/Header';
 import React, { Component } from 'react';
 import './Form.scss';
 
+type ErrorsType = {
+  name: string;
+  date: string;
+  pet: string;
+  assent: string;
+  gender: string;
+  img: string | null;
+};
+
 interface Props {
   value?: string;
 }
 
 interface State {
   isShowMessage: boolean;
+  errors: ErrorsType;
   cards: FormCardType[];
 }
 
@@ -32,10 +42,27 @@ export default class Form extends Component<Props, State> {
     this.radioInputMale = React.createRef();
     this.radioInputFemale = React.createRef();
     this.fileInput = React.createRef();
+
     this.state = {
       isShowMessage: false,
+      errors: { name: '', date: '', pet: '', assent: '', gender: '', img: null },
       cards: [],
     };
+  }
+
+  validate(newCard: FormCardType) {
+    const errors: ErrorsType = {
+      name: newCard.name.search(/^([A-ZА-Я][a-zа-я]{2,15})/)
+        ? 'The Name should consist of 3-11 letters and start with a Capital letter'
+        : '',
+      date: newCard.date.length === 0 ? 'Invalid Date' : '',
+      pet: newCard.pet.length === 0 ? 'Choose your pet' : '',
+      assent: !newCard.assent ? 'Accept the consent' : '',
+      gender: newCard.gender.length === 0 ? 'Choose gender' : '',
+      img: newCard.img ? '' : 'Add an image',
+    };
+
+    return errors;
   }
 
   handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -47,12 +74,35 @@ export default class Form extends Component<Props, State> {
       date: this.dateInput.current!.value,
       pet: this.selectPetInput.current!.value,
       assent: this.checkboxAssentInput.current!.checked,
-      gender: this.radioInputMale.current!.checked ? 'Male' : 'Female',
-      img: URL.createObjectURL(this.fileInput.current!.files![0]),
+      gender: this.radioInputMale.current!.checked
+        ? 'Male'
+        : this.radioInputFemale.current!.checked
+        ? 'Female'
+        : '',
+      img:
+        (this.fileInput.current?.files &&
+          this.fileInput.current?.files.length > 0 &&
+          URL.createObjectURL(this.fileInput.current!.files![0])) ||
+        null,
     };
+
+    const errors = this.validate(newCard);
 
     this.setState((state) => ({
       isShowMessage: state.isShowMessage,
+      errors: errors,
+      cards: [...state.cards],
+    }));
+
+    const hasAnyError = Object.values(errors).some((v) => v || v !== '');
+
+    if (hasAnyError) {
+      return;
+    }
+
+    this.setState((state) => ({
+      isShowMessage: state.isShowMessage,
+      errors: { name: '', date: '', pet: '', assent: '', gender: '', img: null },
       cards: [...state.cards, newCard],
     }));
 
@@ -81,18 +131,22 @@ export default class Form extends Component<Props, State> {
         <Header name="Form" />
         <form className="form" onSubmit={this.handleSubmit.bind(this)}>
           <div className="form__item">
+            {this.state.errors.name && (
+              <label className="form__label-error">{this.state.errors.name}</label>
+            )}
             <label className="form__label">Name:</label>
             <input
               className="form__input"
               type="text"
               ref={this.nameInput}
               placeholder="Enter your name"
-              pattern="^([A-ZА-Я][a-zа-я]{2,15})"
-              required
             />
           </div>
 
           <div className="form__item">
+            {this.state.errors.date && (
+              <label className="form__label-error">{this.state.errors.date}</label>
+            )}
             <label className="form__label">Date:</label>
             <input
               className="form__input"
@@ -100,13 +154,15 @@ export default class Form extends Component<Props, State> {
               max="9999-12-31"
               ref={this.dateInput}
               placeholder="Enter date"
-              required
             />
           </div>
 
           <div className="form__item">
+            {this.state.errors.pet && (
+              <label className="form__label-error">{this.state.errors.pet}</label>
+            )}
             <label className="form__label">Your pet:</label>
-            <select className="form__select" required ref={this.selectPetInput}>
+            <select className="form__select" ref={this.selectPetInput}>
               <option value="">Set your pet</option>
               <option value="No pet">No pet</option>
               <option value="Dog">Dog</option>
@@ -116,17 +172,17 @@ export default class Form extends Component<Props, State> {
           </div>
 
           <div className="form__item">
+            {this.state.errors.assent && (
+              <label className="form__label-error">{this.state.errors.assent}</label>
+            )}
             <label className="form__label">Cross my heart and hope to die. It is true</label>
-            <input
-              className="form__input"
-              type="checkbox"
-              ref={this.checkboxAssentInput}
-              placeholder=""
-              required
-            />
+            <input className="form__input" type="checkbox" ref={this.checkboxAssentInput} />
           </div>
 
           <div className="form__item">
+            {this.state.errors.gender && (
+              <label className="form__label-error">{this.state.errors.gender}</label>
+            )}
             <label className="form__label">Gender:</label>
             <input
               className="form__radio"
@@ -134,7 +190,6 @@ export default class Form extends Component<Props, State> {
               name="gender"
               value="male"
               ref={this.radioInputMale}
-              required
             />
             Male
             <input
@@ -143,12 +198,14 @@ export default class Form extends Component<Props, State> {
               name="gender"
               value="female"
               ref={this.radioInputFemale}
-              required
             />
             Female
           </div>
 
           <div className="form__item">
+            {this.state.errors.img && (
+              <label className="form__label-error">{this.state.errors.img}</label>
+            )}
             <label className="form__label"></label>
             <input
               className="form__input"
@@ -156,7 +213,6 @@ export default class Form extends Component<Props, State> {
               ref={this.fileInput}
               placeholder="Add file"
               accept="image/*"
-              required
             />
           </div>
 
