@@ -1,6 +1,14 @@
-import { FormCardType } from 'pages/Form/Form';
 import React, { Component } from 'react';
 import './FormCard.scss';
+
+export type FormCardType = {
+  name: string;
+  date: string;
+  pet: string;
+  assent: boolean;
+  gender: string;
+  img: string;
+};
 
 export default class FormCard extends Component<FormCardType> {
   constructor(card: FormCardType) {

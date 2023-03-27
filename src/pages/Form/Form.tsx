@@ -1,17 +1,8 @@
-import FormCard from 'components/FormCard/FormCard';
+import FormCard, { FormCardType } from 'components/FormCard/FormCard';
 import FormSubmitMessage from 'components/FormSubmitMessage/FormSubmitMessage';
 import Header from 'components/Header/Header';
 import React, { Component } from 'react';
 import './Form.scss';
-
-export type FormCardType = {
-  name: string;
-  date: string;
-  pet: string;
-  assent: boolean;
-  gender: string;
-  img: string;
-};
 
 interface Props {
   value?: string;
