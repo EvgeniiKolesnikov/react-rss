@@ -1,3 +1,4 @@
+import FormCard from 'components/FormCard/FormCard';
 import Header from 'components/Header/Header';
 import React, { Component } from 'react';
 import './Form.scss';
@@ -152,15 +153,8 @@ export default class Form extends Component<Props, State> {
         </form>
 
         <div className="form__cards">
-          {this.state.cards.map((card: FormCardType, i: number) => (
-            <div key={i} className="form__card">
-              <div className="form__card-item">Name: {card.name}</div>
-              <div className="form__card-item">Date: {card.date}</div>
-              <div className="form__card-item">Pet: {card.pet}</div>
-              <div className="form__card-item">Assent: {card.assent ? 'Yes' : 'No'}</div>
-              <div className="form__card-item">Gender: {card.gender}</div>
-              <img className="form__card-img" src={card.img} alt="card-image" />
-            </div>
+          {this.state.cards.map((formCard: FormCardType, i: number) => (
+            <FormCard key={i} {...formCard} />
           ))}
         </div>
       </>
