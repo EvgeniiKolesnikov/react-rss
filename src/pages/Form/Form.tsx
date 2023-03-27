@@ -8,6 +8,7 @@ export type FormCardType = {
   pet: string;
   assent: boolean;
   gender: string;
+  img: string;
 };
 
 interface Props {
@@ -52,6 +53,7 @@ export default class Form extends Component<Props, State> {
       pet: this.selectPetInput.current!.value,
       assent: this.checkboxAssentInput.current!.checked,
       gender: this.radioInputMale.current!.checked ? 'Male' : 'Female',
+      img: URL.createObjectURL(this.fileInput.current!.files![0]),
     };
 
     this.setState((state) => ({
@@ -140,6 +142,7 @@ export default class Form extends Component<Props, State> {
               type="file"
               ref={this.fileInput}
               placeholder="Add file"
+              accept="image/*"
               required
             />
           </div>
@@ -155,6 +158,7 @@ export default class Form extends Component<Props, State> {
               <div className="form__card-item">Pet: {card.pet}</div>
               <div className="form__card-item">Assent: {card.assent ? 'Yes' : 'No'}</div>
               <div className="form__card-item">Gender: {card.gender}</div>
+              <img className="form__card-img" src={card.img} alt="card-image" />
             </div>
           ))}
         </div>
