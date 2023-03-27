@@ -7,6 +7,7 @@ export type FormCardType = {
   date: string;
   pet: string;
   assent: boolean;
+  gender: string;
 };
 
 interface Props {
@@ -50,6 +51,7 @@ export default class Form extends Component<Props, State> {
       date: this.dateInput.current!.value,
       pet: this.selectPetInput.current!.value,
       assent: this.checkboxAssentInput.current!.checked,
+      gender: this.radioInputMale.current!.checked ? 'Male' : 'Female',
     };
 
     this.setState((state) => ({
@@ -152,6 +154,7 @@ export default class Form extends Component<Props, State> {
               <div className="form__card-item">Date: {card.date}</div>
               <div className="form__card-item">Pet: {card.pet}</div>
               <div className="form__card-item">Assent: {card.assent ? 'Yes' : 'No'}</div>
+              <div className="form__card-item">Gender: {card.gender}</div>
             </div>
           ))}
         </div>
