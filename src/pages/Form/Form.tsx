@@ -91,10 +91,10 @@ export default class Form extends Component<Props, State> {
             <label className="form__label">Your pet:</label>
             <select className="form__select" required ref={this.selectPetInput}>
               <option value="">Set your pet</option>
-              <option value="no pet">No pet</option>
-              <option value="dog">Dog</option>
-              <option value="cat">Cat</option>
-              <option value="other">Other</option>
+              <option value="No pet">No pet</option>
+              <option value="Dog">Dog</option>
+              <option value="Cat">Cat</option>
+              <option value="Other">Other</option>
             </select>
           </div>
 
