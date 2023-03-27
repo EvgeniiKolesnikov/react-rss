@@ -1,4 +1,5 @@
 import FormCard from 'components/FormCard/FormCard';
+import FormSubmitMessage from 'components/FormSubmitMessage/FormSubmitMessage';
 import Header from 'components/Header/Header';
 import React, { Component } from 'react';
 import './Form.scss';
@@ -17,6 +18,7 @@ interface Props {
 }
 
 interface State {
+  isShowMessage: boolean;
   cards: FormCardType[];
 }
 
@@ -40,6 +42,7 @@ export default class Form extends Component<Props, State> {
     this.radioInputFemale = React.createRef();
     this.fileInput = React.createRef();
     this.state = {
+      isShowMessage: false,
       cards: [],
     };
   }
@@ -58,10 +61,27 @@ export default class Form extends Component<Props, State> {
     };
 
     this.setState((state) => ({
+      isShowMessage: state.isShowMessage,
       cards: [...state.cards, newCard],
     }));
 
     formElem.reset();
+    this.showSubmitMessage();
+  }
+
+  showSubmitMessage(): void {
+    this.setState((prevState) => ({
+      isShowMessage: true,
+      cards: prevState.cards,
+    }));
+
+    const timer: NodeJS.Timeout = setTimeout(() => {
+      this.setState((prevState) => ({
+        isShowMessage: false,
+        cards: prevState.cards,
+      }));
+      clearTimeout(timer);
+    }, 3000);
   }
 
   render() {
@@ -149,9 +169,10 @@ export default class Form extends Component<Props, State> {
             />
           </div>
 
-          <input className="form__submit" type="submit" value="Отправить" />
+          <input className="form__submit" type="submit" value="Submit" />
         </form>
 
+        {this.state.isShowMessage && <FormSubmitMessage />}
         <div className="form__cards">
           {this.state.cards.map((formCard: FormCardType, i: number) => (
             <FormCard key={i} {...formCard} />
