@@ -1,6 +1,7 @@
 import FormCard, { FormCardType } from 'components/FormCard/FormCard';
 import FormSubmitMessage from 'components/FormSubmitMessage/FormSubmitMessage';
 import Header from 'components/Header/Header';
+import LabelError from 'components/LabelError/LabelError';
 import React, { Component } from 'react';
 import './Form.scss';
 
@@ -58,7 +59,7 @@ export default class Form extends Component<Props, State> {
       date: newCard.date.length === 0 ? 'Invalid Date' : '',
       pet: newCard.pet.length === 0 ? 'Choose your pet' : '',
       assent: !newCard.assent ? 'Accept the consent' : '',
-      gender: newCard.gender.length === 0 ? 'Choose gender' : '',
+      gender: newCard.gender.length === 0 ? 'Choose a gender' : '',
       img: newCard.img ? '' : 'Add an image',
     };
 
@@ -131,9 +132,7 @@ export default class Form extends Component<Props, State> {
         <Header name="Form" />
         <form className="form" onSubmit={this.handleSubmit.bind(this)}>
           <div className="form__item">
-            {this.state.errors.name && (
-              <label className="form__label-error">{this.state.errors.name}</label>
-            )}
+            <LabelError value={this.state.errors.name} />
             <label className="form__label">Name:</label>
             <input
               className="form__input"
@@ -144,9 +143,7 @@ export default class Form extends Component<Props, State> {
           </div>
 
           <div className="form__item">
-            {this.state.errors.date && (
-              <label className="form__label-error">{this.state.errors.date}</label>
-            )}
+            <LabelError value={this.state.errors.date} />
             <label className="form__label">Date:</label>
             <input
               className="form__input"
@@ -158,9 +155,7 @@ export default class Form extends Component<Props, State> {
           </div>
 
           <div className="form__item">
-            {this.state.errors.pet && (
-              <label className="form__label-error">{this.state.errors.pet}</label>
-            )}
+            <LabelError value={this.state.errors.pet} />
             <label className="form__label">Your pet:</label>
             <select className="form__select" ref={this.selectPetInput}>
               <option value="">Set your pet</option>
@@ -172,17 +167,13 @@ export default class Form extends Component<Props, State> {
           </div>
 
           <div className="form__item">
-            {this.state.errors.assent && (
-              <label className="form__label-error">{this.state.errors.assent}</label>
-            )}
+            <LabelError value={this.state.errors.assent} />
             <label className="form__label">Cross my heart and hope to die. It is true</label>
             <input className="form__input" type="checkbox" ref={this.checkboxAssentInput} />
           </div>
 
           <div className="form__item">
-            {this.state.errors.gender && (
-              <label className="form__label-error">{this.state.errors.gender}</label>
-            )}
+            <LabelError value={this.state.errors.gender} />
             <label className="form__label">Gender:</label>
             <input
               className="form__radio"
@@ -203,9 +194,7 @@ export default class Form extends Component<Props, State> {
           </div>
 
           <div className="form__item">
-            {this.state.errors.img && (
-              <label className="form__label-error">{this.state.errors.img}</label>
-            )}
+            <LabelError value={this.state.errors.img} />
             <label className="form__label"></label>
             <input
               className="form__input"
