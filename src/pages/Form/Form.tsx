@@ -85,6 +85,7 @@ export default class Form extends Component<Props, State> {
             <input
               className="form__input"
               type="date"
+              max="9999-12-31"
               ref={this.dateInput}
               placeholder="Enter date"
               required
