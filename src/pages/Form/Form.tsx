@@ -5,6 +5,8 @@ import './Form.scss';
 export type FormCardType = {
   name: string;
   date: string;
+  pet: string;
+  assent: boolean;
 };
 
 interface Props {
@@ -18,19 +20,19 @@ interface State {
 export default class Form extends Component<Props, State> {
   private nameInput: React.RefObject<HTMLInputElement>;
   private dateInput: React.RefObject<HTMLInputElement>;
-  private selectInput: React.RefObject<HTMLSelectElement>;
-  private checkboxInput: React.RefObject<HTMLInputElement>;
-  private fileInput: React.RefObject<HTMLInputElement>;
+  private selectPetInput: React.RefObject<HTMLSelectElement>;
+  private checkboxAssentInput: React.RefObject<HTMLInputElement>;
   private radioInputMale: React.RefObject<HTMLInputElement>;
   private radioInputFemale: React.RefObject<HTMLInputElement>;
+  private fileInput: React.RefObject<HTMLInputElement>;
 
   constructor(props: Props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.nameInput = React.createRef();
     this.dateInput = React.createRef();
-    this.selectInput = React.createRef();
-    this.checkboxInput = React.createRef();
+    this.selectPetInput = React.createRef();
+    this.checkboxAssentInput = React.createRef();
     this.radioInputMale = React.createRef();
     this.radioInputFemale = React.createRef();
     this.fileInput = React.createRef();
@@ -46,6 +48,8 @@ export default class Form extends Component<Props, State> {
     const newCard: FormCardType = {
       name: this.nameInput.current!.value,
       date: this.dateInput.current!.value,
+      pet: this.selectPetInput.current!.value,
+      assent: this.checkboxAssentInput.current!.checked,
     };
 
     this.setState((state) => ({
@@ -85,12 +89,12 @@ export default class Form extends Component<Props, State> {
 
           <div className="form__item">
             <label className="form__label">Your pet:</label>
-            <select className="form__select" required ref={this.selectInput}>
+            <select className="form__select" required ref={this.selectPetInput}>
               <option value="">Set your pet</option>
-              <option value="no pet">no pet</option>
-              <option value="dog">dog</option>
-              <option value="cat">cat</option>
-              <option value="other">other</option>
+              <option value="no pet">No pet</option>
+              <option value="dog">Dog</option>
+              <option value="cat">Cat</option>
+              <option value="other">Other</option>
             </select>
           </div>
 
@@ -99,7 +103,7 @@ export default class Form extends Component<Props, State> {
             <input
               className="form__input"
               type="checkbox"
-              ref={this.checkboxInput}
+              ref={this.checkboxAssentInput}
               placeholder=""
               required
             />
@@ -146,6 +150,8 @@ export default class Form extends Component<Props, State> {
             <div key={i} className="form__card">
               <div className="form__card-item">Name: {card.name}</div>
               <div className="form__card-item">Date: {card.date}</div>
+              <div className="form__card-item">Pet: {card.pet}</div>
+              <div className="form__card-item">Assent: {card.assent ? 'Yes' : 'No'}</div>
             </div>
           ))}
         </div>
