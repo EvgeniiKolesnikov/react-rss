@@ -1,4 +1,3 @@
-import React, { Component } from 'react';
 import './FormCard.scss';
 
 export type FormCardType = {
@@ -10,20 +9,15 @@ export type FormCardType = {
   img: string | null;
 };
 
-export default class FormCard extends Component<FormCardType> {
-  constructor(card: FormCardType) {
-    super(card);
-  }
-  render() {
-    return (
-      <div className="form__card">
-        <div className="form__card-item">Name: {this.props.name}</div>
-        <div className="form__card-item">Date: {this.props.date}</div>
-        <div className="form__card-item">Pet: {this.props.pet}</div>
-        <div className="form__card-item">Assent: {this.props.assent ? 'Yes' : 'No'}</div>
-        <div className="form__card-item">Gender: {this.props.gender}</div>
-        {this.props.img && <img className="form__card-img" src={this.props.img} alt="card-image" />}
-      </div>
-    );
-  }
+export default function FormCard({ name, date, pet, assent, gender, img }: FormCardType) {
+  return (
+    <div className="form__card">
+      <div className="form__card-item">Name: {name}</div>
+      <div className="form__card-item">Date: {date}</div>
+      <div className="form__card-item">Pet: {pet}</div>
+      <div className="form__card-item">Assent: {assent ? 'Yes' : 'No'}</div>
+      <div className="form__card-item">Gender: {gender}</div>
+      {img && <img className="form__card-img" src={img} alt="card-image" />}
+    </div>
+  );
 }
