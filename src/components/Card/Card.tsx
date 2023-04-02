@@ -1,23 +1,13 @@
 import { cardType } from 'data/CardsData';
-import React, { Component } from 'react';
 import './Card.scss';
 
-interface State {
-  name: string;
-}
-
-export default class Card extends Component<cardType, State> {
-  constructor(card: cardType) {
-    super(card);
-  }
-  render() {
-    return (
-      <div className="card">
-        <img className="card__image" src={this.props.img} alt={`card image ${this.props.id}`} />
-        <div className="card__price">{this.props.price}</div>
-        <div className="card__brand">{this.props.brand}</div>
-        <div className="card__desc">{this.props.desc}</div>
-      </div>
-    );
-  }
+export default function Card({ id, img, brand, desc, price }: cardType) {
+  return (
+    <div className="card">
+      <img className="card__image" src={img} alt={`card image ${id}`} />
+      <div className="card__price">{price}</div>
+      <div className="card__brand">{brand}</div>
+      <div className="card__desc">{desc}</div>
+    </div>
+  );
 }
