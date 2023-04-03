@@ -1,9 +1,9 @@
 import './LabelError.scss';
 
 interface Props {
-  value: string | null;
+  error: string | undefined;
 }
 
-export default function LabelError({ value }: Props) {
-  return value ? <label className="form__label-error">{value}</label> : <></>;
+export default function LabelError({ error }: Props) {
+  return error ? <label className="form__label-error">{error}</label> : <></>;
 }
