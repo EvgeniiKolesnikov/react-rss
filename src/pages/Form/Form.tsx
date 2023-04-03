@@ -14,7 +14,6 @@ export default function Form() {
     register,
     handleSubmit,
     reset,
-    watch,
     formState: { errors },
   } = useForm<FormCardType>({
     reValidateMode: 'onSubmit',
@@ -112,20 +111,18 @@ export default function Form() {
           <input
             className="form__radio"
             type="radio"
-            // name="gender"
             value="male"
             {...register('gender', {
-              required: 'gender err',
+              required: 'Choose a gender',
             })}
           />
           Male
           <input
             className="form__radio"
             type="radio"
-            // name="gender"
             value="female"
             {...register('gender', {
-              required: 'gender err',
+              required: 'Choose a gender',
             })}
           />
           Female
