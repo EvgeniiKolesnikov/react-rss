@@ -7,6 +7,7 @@ import React, { useState } from 'react';
 import { FormCardType } from 'components/FormCard/FormCard';
 import { useForm } from 'react-hook-form';
 import './Form.scss';
+import FormInputLabel from 'components/FormInputLabel/FormInputLabel';
 
 export default function Form() {
   const [isShowMessage, setIsShowMessage] = useState<boolean>(false);
@@ -46,7 +47,7 @@ export default function Form() {
       <form className="form" onSubmit={handleSubmit(onSubmit)}>
         <FormField>
           <FormInputError error={errors.name?.message} />
-          <label className="form__label">Name:</label>
+          <FormInputLabel text="Name:" />
           <input
             className="form__input"
             type="text"
@@ -62,7 +63,7 @@ export default function Form() {
 
         <FormField>
           <FormInputError error={errors.date?.message} />
-          <label className="form__label">Date:</label>
+          <FormInputLabel text="Date:" />
           <input
             className="form__input"
             type="date"
@@ -78,7 +79,7 @@ export default function Form() {
 
         <FormField>
           <FormInputError error={errors.pet?.message} />
-          <label className="form__label">Your pet:</label>
+          <FormInputLabel text="Your pet:" />
           <select
             className="form__select"
             {...register('pet', {
@@ -97,7 +98,7 @@ export default function Form() {
 
         <FormField>
           <FormInputError error={errors.assent?.message} />
-          <label className="form__label">Cross my heart and hope to die. It is true</label>
+          <FormInputLabel text="Cross my heart and hope to die. It is true" />
           <input
             className="form__input"
             type="checkbox"
@@ -109,7 +110,7 @@ export default function Form() {
 
         <FormField>
           <FormInputError error={errors.gender?.message} />
-          <label className="form__label">Gender:</label>
+          <FormInputLabel text="Gender:" />
           <input
             className="form__radio"
             type="radio"
