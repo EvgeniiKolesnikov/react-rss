@@ -3,7 +3,6 @@ import FormField from 'components/FormField/FormField';
 import FormFieldError from 'components/FormFieldError/FormFieldError';
 import FormFieldLabel from 'components/FormFieldLabel/FormFieldLabel';
 import FormSubmitMessage from 'components/FormSubmitMessage/FormSubmitMessage';
-import Header from 'components/Header/Header';
 import React, { useState } from 'react';
 import { FormCardType } from 'components/FormCard/FormCard';
 import { useForm } from 'react-hook-form';
@@ -43,7 +42,6 @@ export default function Form() {
 
   return (
     <>
-      <Header name="Form" />
       <form className="form" onSubmit={handleSubmit(onSubmit)}>
         <FormField>
           <FormFieldError error={errors.name?.message} />
