@@ -6,6 +6,7 @@ import React, { useState } from 'react';
 import { FormCardType } from 'components/FormCard/FormCard';
 import { useForm } from 'react-hook-form';
 import './Form.scss';
+import FormField from 'components/FormField/FormField';
 
 export default function Form() {
   const [isShowMessage, setIsShowMessage] = useState<boolean>(false);
@@ -43,7 +44,7 @@ export default function Form() {
     <>
       <Header name="Form" />
       <form className="form" onSubmit={handleSubmit(onSubmit)}>
-        <div className="form__item">
+        <FormField>
           <LabelError error={errors.name?.message} />
           <label className="form__label">Name:</label>
           <input
@@ -57,9 +58,9 @@ export default function Form() {
             })}
             placeholder="Enter your name"
           />
-        </div>
+        </FormField>
 
-        <div className="form__item">
+        <FormField>
           <LabelError error={errors.date?.message} />
           <label className="form__label">Date:</label>
           <input
@@ -73,9 +74,9 @@ export default function Form() {
             max="9999-12-31"
             placeholder="Enter date"
           />
-        </div>
+        </FormField>
 
-        <div className="form__item">
+        <FormField>
           <LabelError error={errors.pet?.message} />
           <label className="form__label">Your pet:</label>
           <select
@@ -92,9 +93,9 @@ export default function Form() {
             <option value="Cat">Cat</option>
             <option value="Other">Other</option>
           </select>
-        </div>
+        </FormField>
 
-        <div className="form__item">
+        <FormField>
           <LabelError error={errors.assent?.message} />
           <label className="form__label">Cross my heart and hope to die. It is true</label>
           <input
@@ -104,9 +105,9 @@ export default function Form() {
               validate: (assent) => (!assent ? 'Accept the consent' : true),
             })}
           />
-        </div>
+        </FormField>
 
-        <div className="form__item">
+        <FormField>
           <LabelError error={errors.gender?.message} />
           <label className="form__label">Gender:</label>
           <input
@@ -127,11 +128,10 @@ export default function Form() {
             })}
           />
           Female
-        </div>
+        </FormField>
 
-        <div className="form__item">
+        <FormField>
           <LabelError error={errors.img?.message} />
-          <label className="form__label"></label>
           <input
             className="form__input"
             type="file"
@@ -141,7 +141,7 @@ export default function Form() {
             placeholder="Add file"
             accept="image/*"
           />
-        </div>
+        </FormField>
 
         <input className="form__submit" type="submit" value="Submit" />
       </form>
