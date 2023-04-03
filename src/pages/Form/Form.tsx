@@ -1,6 +1,6 @@
 import FormCards from 'components/FormCards/FormCards';
 import FormField from 'components/FormField/FormField';
-import FormInputError from 'components/FormInputError/FormInputError';
+import FormFieldError from 'components/FormFieldError/FormFieldError';
 import FormSubmitMessage from 'components/FormSubmitMessage/FormSubmitMessage';
 import Header from 'components/Header/Header';
 import React, { useState } from 'react';
@@ -46,7 +46,7 @@ export default function Form() {
       <Header name="Form" />
       <form className="form" onSubmit={handleSubmit(onSubmit)}>
         <FormField>
-          <FormInputError error={errors.name?.message} />
+          <FormFieldError error={errors.name?.message} />
           <FormInputLabel text="Name:" />
           <input
             className="form__input"
@@ -62,7 +62,7 @@ export default function Form() {
         </FormField>
 
         <FormField>
-          <FormInputError error={errors.date?.message} />
+          <FormFieldError error={errors.date?.message} />
           <FormInputLabel text="Date:" />
           <input
             className="form__input"
@@ -78,7 +78,7 @@ export default function Form() {
         </FormField>
 
         <FormField>
-          <FormInputError error={errors.pet?.message} />
+          <FormFieldError error={errors.pet?.message} />
           <FormInputLabel text="Your pet:" />
           <select
             className="form__select"
@@ -97,7 +97,7 @@ export default function Form() {
         </FormField>
 
         <FormField>
-          <FormInputError error={errors.assent?.message} />
+          <FormFieldError error={errors.assent?.message} />
           <FormInputLabel text="Cross my heart and hope to die. It is true" />
           <input
             className="form__input"
@@ -109,7 +109,7 @@ export default function Form() {
         </FormField>
 
         <FormField>
-          <FormInputError error={errors.gender?.message} />
+          <FormFieldError error={errors.gender?.message} />
           <FormInputLabel text="Gender:" />
           <input
             className="form__radio"
@@ -132,7 +132,7 @@ export default function Form() {
         </FormField>
 
         <FormField>
-          <FormInputError error={errors.img?.message} />
+          <FormFieldError error={errors.img?.message} />
           <input
             className="form__input"
             type="file"
