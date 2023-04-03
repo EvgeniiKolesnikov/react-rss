@@ -21,6 +21,9 @@ export default function Form() {
   });
 
   const onSubmit = (newCard: FormCardType) => {
+    const fileList = newCard.img as FileList | null;
+    const imgUrl = fileList && fileList?.length > 0 ? URL.createObjectURL(fileList[0]) : null;
+    newCard.img = imgUrl;
     setCards((prevCards) => [...prevCards, newCard]);
 
     reset();
