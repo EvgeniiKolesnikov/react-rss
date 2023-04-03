@@ -2,92 +2,30 @@ import FormCard, { FormCardType } from 'components/FormCard/FormCard';
 import FormSubmitMessage from 'components/FormSubmitMessage/FormSubmitMessage';
 import Header from 'components/Header/Header';
 import LabelError from 'components/LabelError/LabelError';
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import './Form.scss';
 
-type ErrorsType = {
-  name: string;
-  date: string;
-  pet: string;
-  assent: string;
-  gender: string;
-  img: string | null;
-};
-
-type Input = React.RefObject<HTMLInputElement>;
-type Select = React.RefObject<HTMLSelectElement>;
-
 export default function Form() {
-  const nameInput: Input = useRef(null);
-  const dateInput: Input = useRef(null);
-  const selectPetInput: Select = useRef(null);
-  const checkboxAssentInput: Input = useRef(null);
-  const radioInputMale: Input = useRef(null);
-  const radioInputFemale: Input = useRef(null);
-  const fileInput: Input = useRef(null);
-
   const [isShowMessage, setIsShowMessage] = useState<boolean>(false);
-  const [formErrors, setFormErrors] = useState<ErrorsType>({
-    name: '',
-    date: '',
-    pet: '',
-    assent: '',
-    gender: '',
-    img: null,
-  });
   const [cards, setCards] = useState<FormCardType[]>([]);
 
-  function validate(newCard: FormCardType) {
-    const errors: ErrorsType = {
-      name: newCard.name.search(/^([A-ZА-Я][a-zа-я]{2,15})/)
-        ? 'The Name should consist of 3-11 letters and start with a Capital letter'
-        : '',
-      date: newCard.date.length === 0 ? 'Invalid Date' : '',
-      pet: newCard.pet.length === 0 ? 'Choose your pet' : '',
-      assent: !newCard.assent ? 'Accept the consent' : '',
-      gender: newCard.gender.length === 0 ? 'Choose a gender' : '',
-      img: newCard.img ? '' : 'Add an image',
-    };
+  const {
+    register,
+    handleSubmit,
+    reset,
+    watch,
+    formState: { errors },
+  } = useForm<FormCardType>({
+    reValidateMode: 'onSubmit',
+  });
 
-    return errors;
-  }
-
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    const formElem = e.target as HTMLFormElement;
-
-    const newCard: FormCardType = {
-      name: nameInput.current!.value,
-      date: dateInput.current!.value,
-      pet: selectPetInput.current!.value,
-      assent: checkboxAssentInput.current!.checked,
-      gender: radioInputMale.current!.checked
-        ? 'Male'
-        : radioInputFemale.current!.checked
-        ? 'Female'
-        : '',
-      img:
-        (fileInput.current?.files &&
-          fileInput.current?.files.length > 0 &&
-          URL.createObjectURL(fileInput.current!.files![0])) ||
-        null,
-    };
-
-    const errors = validate(newCard);
-    setFormErrors(errors);
-
-    const hasAnyError = Object.values(errors).some((v) => v || v !== '');
-
-    if (hasAnyError) {
-      return;
-    }
-
-    setFormErrors({ name: '', date: '', pet: '', assent: '', gender: '', img: null });
+  const onSubmit = (newCard: FormCardType) => {
     setCards((prevCards) => [...prevCards, newCard]);
 
-    formElem.reset();
+    reset();
     showSubmitMessage();
-  }
+  };
 
   function showSubmitMessage(): void {
     setIsShowMessage(true);
@@ -101,34 +39,50 @@ export default function Form() {
   return (
     <>
       <Header name="Form" />
-      <form className="form" onSubmit={handleSubmit}>
+      <form className="form" onSubmit={handleSubmit(onSubmit)}>
         <div className="form__item">
-          <LabelError value={formErrors.name} />
+          <LabelError error={errors.name?.message} />
           <label className="form__label">Name:</label>
           <input
             className="form__input"
             type="text"
-            ref={nameInput}
+            {...register('name', {
+              validate: (n) =>
+                n.search(/^([A-ZА-Я][a-zа-я]{2,15})/)
+                  ? 'The Name should consist of 3-11 letters and start with a Capital letter'
+                  : true,
+            })}
             placeholder="Enter your name"
           />
         </div>
 
         <div className="form__item">
-          <LabelError value={formErrors.date} />
+          <LabelError error={errors.date?.message} />
           <label className="form__label">Date:</label>
           <input
             className="form__input"
             type="date"
+            {...register('date', {
+              validate: (date) => {
+                return date.length === 0 ? 'Invalid Date' : true;
+              },
+            })}
             max="9999-12-31"
-            ref={dateInput}
             placeholder="Enter date"
           />
         </div>
 
         <div className="form__item">
-          <LabelError value={formErrors.pet} />
+          <LabelError error={errors.pet?.message} />
           <label className="form__label">Your pet:</label>
-          <select className="form__select" ref={selectPetInput}>
+          <select
+            className="form__select"
+            {...register('pet', {
+              validate: (pet) => {
+                return pet.length === 0 ? 'Choose your pet' : true;
+              },
+            })}
+          >
             <option value="">Set your pet</option>
             <option value="No pet">No pet</option>
             <option value="Dog">Dog</option>
@@ -138,39 +92,51 @@ export default function Form() {
         </div>
 
         <div className="form__item">
-          <LabelError value={formErrors.assent} />
+          <LabelError error={errors.assent?.message} />
           <label className="form__label">Cross my heart and hope to die. It is true</label>
-          <input className="form__input" type="checkbox" ref={checkboxAssentInput} />
+          <input
+            className="form__input"
+            type="checkbox"
+            {...register('assent', {
+              validate: (assent) => (!assent ? 'Accept the consent' : true),
+            })}
+          />
         </div>
 
         <div className="form__item">
-          <LabelError value={formErrors.gender} />
+          <LabelError error={errors.gender?.message} />
           <label className="form__label">Gender:</label>
           <input
             className="form__radio"
             type="radio"
-            name="gender"
+            // name="gender"
             value="male"
-            ref={radioInputMale}
+            {...register('gender', {
+              required: 'gender err',
+            })}
           />
           Male
           <input
             className="form__radio"
             type="radio"
-            name="gender"
+            // name="gender"
             value="female"
-            ref={radioInputFemale}
+            {...register('gender', {
+              required: 'gender err',
+            })}
           />
           Female
         </div>
 
         <div className="form__item">
-          <LabelError value={formErrors.img} />
+          <LabelError error={errors.img?.message} />
           <label className="form__label"></label>
           <input
             className="form__input"
             type="file"
-            ref={fileInput}
+            {...register('img', {
+              validate: (img) => (img && img.length > 0 ? true : 'Add an image'),
+            })}
             placeholder="Add file"
             accept="image/*"
           />
