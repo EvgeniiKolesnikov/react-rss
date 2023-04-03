@@ -1,8 +1,9 @@
-import FormCard, { FormCardType } from 'components/FormCard/FormCard';
+import FormCards from 'components/FormCards/FormCards';
 import FormSubmitMessage from 'components/FormSubmitMessage/FormSubmitMessage';
 import Header from 'components/Header/Header';
 import LabelError from 'components/LabelError/LabelError';
 import React, { useState } from 'react';
+import { FormCardType } from 'components/FormCard/FormCard';
 import { useForm } from 'react-hook-form';
 import './Form.scss';
 
@@ -146,11 +147,7 @@ export default function Form() {
       </form>
 
       {isShowMessage && <FormSubmitMessage />}
-      <div className="form__cards">
-        {cards.map((formCard: FormCardType, i: number) => (
-          <FormCard key={i} {...formCard} />
-        ))}
-      </div>
+      <FormCards formCards={cards} />
     </>
   );
 }
