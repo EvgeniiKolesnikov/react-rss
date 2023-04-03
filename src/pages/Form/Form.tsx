@@ -1,12 +1,12 @@
 import FormCards from 'components/FormCards/FormCards';
+import FormField from 'components/FormField/FormField';
+import FormInputError from 'components/FormInputError/FormInputError';
 import FormSubmitMessage from 'components/FormSubmitMessage/FormSubmitMessage';
 import Header from 'components/Header/Header';
-import LabelError from 'components/LabelError/LabelError';
 import React, { useState } from 'react';
 import { FormCardType } from 'components/FormCard/FormCard';
 import { useForm } from 'react-hook-form';
 import './Form.scss';
-import FormField from 'components/FormField/FormField';
 
 export default function Form() {
   const [isShowMessage, setIsShowMessage] = useState<boolean>(false);
@@ -45,7 +45,7 @@ export default function Form() {
       <Header name="Form" />
       <form className="form" onSubmit={handleSubmit(onSubmit)}>
         <FormField>
-          <LabelError error={errors.name?.message} />
+          <FormInputError error={errors.name?.message} />
           <label className="form__label">Name:</label>
           <input
             className="form__input"
@@ -61,7 +61,7 @@ export default function Form() {
         </FormField>
 
         <FormField>
-          <LabelError error={errors.date?.message} />
+          <FormInputError error={errors.date?.message} />
           <label className="form__label">Date:</label>
           <input
             className="form__input"
@@ -77,7 +77,7 @@ export default function Form() {
         </FormField>
 
         <FormField>
-          <LabelError error={errors.pet?.message} />
+          <FormInputError error={errors.pet?.message} />
           <label className="form__label">Your pet:</label>
           <select
             className="form__select"
@@ -96,7 +96,7 @@ export default function Form() {
         </FormField>
 
         <FormField>
-          <LabelError error={errors.assent?.message} />
+          <FormInputError error={errors.assent?.message} />
           <label className="form__label">Cross my heart and hope to die. It is true</label>
           <input
             className="form__input"
@@ -108,7 +108,7 @@ export default function Form() {
         </FormField>
 
         <FormField>
-          <LabelError error={errors.gender?.message} />
+          <FormInputError error={errors.gender?.message} />
           <label className="form__label">Gender:</label>
           <input
             className="form__radio"
@@ -131,7 +131,7 @@ export default function Form() {
         </FormField>
 
         <FormField>
-          <LabelError error={errors.img?.message} />
+          <FormInputError error={errors.img?.message} />
           <input
             className="form__input"
             type="file"
