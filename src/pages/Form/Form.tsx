@@ -1,13 +1,13 @@
 import FormCards from 'components/FormCards/FormCards';
 import FormField from 'components/FormField/FormField';
 import FormFieldError from 'components/FormFieldError/FormFieldError';
+import FormFieldLabel from 'components/FormFieldLabel/FormFieldLabel';
 import FormSubmitMessage from 'components/FormSubmitMessage/FormSubmitMessage';
 import Header from 'components/Header/Header';
 import React, { useState } from 'react';
 import { FormCardType } from 'components/FormCard/FormCard';
 import { useForm } from 'react-hook-form';
 import './Form.scss';
-import FormInputLabel from 'components/FormInputLabel/FormInputLabel';
 
 export default function Form() {
   const [isShowMessage, setIsShowMessage] = useState<boolean>(false);
@@ -47,7 +47,7 @@ export default function Form() {
       <form className="form" onSubmit={handleSubmit(onSubmit)}>
         <FormField>
           <FormFieldError error={errors.name?.message} />
-          <FormInputLabel text="Name:" />
+          <FormFieldLabel text="Name:" />
           <input
             className="form__input"
             type="text"
@@ -63,7 +63,7 @@ export default function Form() {
 
         <FormField>
           <FormFieldError error={errors.date?.message} />
-          <FormInputLabel text="Date:" />
+          <FormFieldLabel text="Date:" />
           <input
             className="form__input"
             type="date"
@@ -79,7 +79,7 @@ export default function Form() {
 
         <FormField>
           <FormFieldError error={errors.pet?.message} />
-          <FormInputLabel text="Your pet:" />
+          <FormFieldLabel text="Your pet:" />
           <select
             className="form__select"
             {...register('pet', {
@@ -98,7 +98,7 @@ export default function Form() {
 
         <FormField>
           <FormFieldError error={errors.assent?.message} />
-          <FormInputLabel text="Cross my heart and hope to die. It is true" />
+          <FormFieldLabel text="Cross my heart and hope to die. It is true" />
           <input
             className="form__input"
             type="checkbox"
@@ -110,7 +110,7 @@ export default function Form() {
 
         <FormField>
           <FormFieldError error={errors.gender?.message} />
-          <FormInputLabel text="Gender:" />
+          <FormFieldLabel text="Gender:" />
           <input
             className="form__radio"
             type="radio"
