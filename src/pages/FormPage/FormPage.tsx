@@ -10,23 +10,22 @@ export default function FormPage() {
   const [isShowMessage, setIsShowMessage] = useState<boolean>(false);
   const [cards, setCards] = useState<FormCardType[]>([]);
 
-  function updateCards(newCard: FormCardType) {
-    setCards((prevCards) => [...prevCards, newCard]);
-  }
-
   function showSubmitMessage(): void {
     setIsShowMessage(true);
-
-    const timer: NodeJS.Timeout = setTimeout(() => {
+    setTimeout(() => {
       setIsShowMessage(false);
-      clearTimeout(timer);
     }, 3000);
+  }
+
+  function updateCards(newCard: FormCardType) {
+    setCards((prevCards) => [...prevCards, newCard]);
+    showSubmitMessage();
   }
 
   return (
     <>
       <Header name="Form" />
-      <Form updateCards={updateCards} showSubmitMessage={showSubmitMessage} />
+      <Form updateCards={updateCards} />
       {isShowMessage && <FormSubmitMessage />}
       <FormCards formCards={cards} />
     </>

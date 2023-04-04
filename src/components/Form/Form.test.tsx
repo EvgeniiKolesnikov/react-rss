@@ -9,9 +9,7 @@ test('renders Form placeholderName', () => {
     cards = [...cards, newCard];
   }
 
-  function showSubmitMessage(): void {}
-
-  render(<Form showSubmitMessage={showSubmitMessage} updateCards={updateCards} />);
+  render(<Form updateCards={updateCards} />);
   const placeholderName = screen.getByPlaceholderText('Enter your name');
   expect(placeholderName).toBeInTheDocument();
 });

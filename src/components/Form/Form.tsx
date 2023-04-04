@@ -7,10 +7,9 @@ import './Form.scss';
 
 interface IForm {
   updateCards: (newCard: FormCardType) => void;
-  showSubmitMessage: () => void;
 }
 
-export default function Form({ updateCards, showSubmitMessage }: IForm) {
+export default function Form({ updateCards }: IForm) {
   const {
     register,
     handleSubmit,
@@ -24,7 +23,6 @@ export default function Form({ updateCards, showSubmitMessage }: IForm) {
     const fileList = newCard.img as FileList | null;
     const imgUrl = fileList && fileList?.length > 0 ? URL.createObjectURL(fileList[0]) : null;
     newCard.img = imgUrl;
-    showSubmitMessage();
     updateCards(newCard);
     reset();
   };
