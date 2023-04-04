@@ -9,13 +9,7 @@
   color: rgb(91, 91, 91);
 }
 
-.form__label {
-  margin-right: 10px;
 
-  color: rgb(91, 91, 91);
-
-  font-size: 20px;
-}
 
 .form__input,
 .form__select {
@@ -51,15 +45,4 @@
     color: rgb(155, 155, 155);
     background-color: #fff;
   }
-}
-
-.form__cards {
-  position: relative;
-  top: 40px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 10px;
 }

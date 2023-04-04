@@ -1,45 +1,35 @@
-import React, { Component } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import './SearchBar.scss';
 
-interface Props {
-  value?: string;
-}
+export default function SearchBar() {
+  const [value, setValue] = useState('');
+  const refValue = useRef(value);
 
-interface State {
-  value: string;
-}
-
-export default class SearchBar extends Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    this.state = { value: '' };
-  }
-
-  componentDidMount(): void {
+  useEffect(() => {
     const lastValue = localStorage.getItem('rss-input-value') || '';
-    this.setState({ value: lastValue });
-  }
+    setValue(lastValue);
+    refValue.current = lastValue;
 
-  componentWillUnmount(): void {
-    localStorage.setItem('rss-input-value', this.state.value);
-  }
+    return () => {
+      localStorage.setItem('rss-input-value', refValue.current);
+    };
+  }, []);
 
-  onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({ value: e.target.value });
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value);
+    refValue.current = e.target.value;
   };
 
-  render() {
-    return (
-      <>
-        <input
-          className="search-bar"
-          onChange={this.onChange}
-          type="text"
-          value={this.state?.value || ''}
-          placeholder="Search..."
-          title="search-bar"
-        />
-      </>
-    );
-  }
+  return (
+    <>
+      <input
+        className="search-bar"
+        onChange={onChange}
+        type="text"
+        value={value || ''}
+        placeholder="Search..."
+        title="search-bar"
+      />
+    </>
+  );
 }
