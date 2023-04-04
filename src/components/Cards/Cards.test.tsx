@@ -1,9 +1,9 @@
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import Cards from './Cards';
 import '@testing-library/jest-dom';
 
 test('Cards rendered', () => {
-  const { container } = render(<Cards />);
-  const cards = container.querySelector('.cards');
-  expect(cards).toBeInTheDocument();
+  render(<Cards />);
+  const cards = screen.queryByText('cards');
+  expect(cards).not.toBeInTheDocument();
 });

@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { screen, render } from '@testing-library/react';
 import FormCards from './FormCards';
 import '@testing-library/jest-dom';
 import { FormCardType } from 'components/FormCard/FormCard';
@@ -13,7 +13,9 @@ const cardExample: FormCardType = {
 };
 
 test('FormCards rendered', () => {
-  const { container } = render(<FormCards formCards={[cardExample]} />);
-  const formCardsElem = container.querySelector('.form__cards');
-  expect(formCardsElem).toBeInTheDocument();
+  render(<FormCards formCards={[cardExample]} />);
+  const fieldName = screen.queryByText(/Name: Jo/);
+  const fieldDate = screen.queryByText(/Date: 01-11-2002/);
+  expect(fieldName).toBeInTheDocument();
+  expect(fieldDate).toBeInTheDocument();
 });
