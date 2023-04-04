@@ -9,21 +9,28 @@ interface IForm {
   updateCards: (newCard: FormCardType) => void;
 }
 
+type FormDataType = Omit<FormCardType, 'img'> & { img: FileList | null };
+
 export default function Form({ updateCards }: IForm) {
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<FormCardType>({
+  } = useForm<FormDataType>({
     reValidateMode: 'onSubmit',
   });
 
-  const onSubmit = (newCard: FormCardType) => {
-    const fileList = newCard.img as FileList | null;
+  const onSubmit = (newCard: FormDataType) => {
+    const fileList = newCard.img;
     const imgUrl = fileList && fileList?.length > 0 ? URL.createObjectURL(fileList[0]) : null;
-    newCard.img = imgUrl;
-    updateCards(newCard);
+
+    const cardDate: FormCardType = {
+      ...newCard,
+      img: imgUrl,
+    };
+
+    updateCards(cardDate);
     reset();
   };
 
