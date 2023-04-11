@@ -5,5 +5,5 @@ interface IBackdrop {
 }
 
 export default function Backdrop({ closeDetails }: IBackdrop) {
-  return <div className="backdrop" onClick={closeDetails}></div>;
+  return <div className="backdrop" onClick={closeDetails} role="banner"></div>;
 }
