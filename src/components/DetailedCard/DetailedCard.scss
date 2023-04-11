@@ -1,0 +1,66 @@
+.detailed-card {
+  position: fixed;
+  width: 360px;
+  height: 500px;
+
+  z-index: 2;
+  opacity: 1;
+  border-top-right-radius: 7px;
+  border-top-left-radius: 7px;
+  background-color: #fff;
+  transition: 0.5s ease-in-out;
+}
+
+.detailed-card__image {
+  width: 360px;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+}
+
+.detailed-card__close {
+  position: absolute;
+  content: "";
+  width: 30px;
+  height: 30px;
+
+  right: 0;
+  top: 0;
+
+  cursor: pointer;
+  -webkit-mask-image: url("../../assets/svg/cross.svg");
+  mask-image: url("../../assets/svg/cross.svg");
+  mask-size: 30px;
+  background-color: #fff;
+  background-size: 30px;
+  transition: 0.1s ease-in-out;
+  &:hover {
+    background-color: #dd6767;
+  }
+}
+
+.detailed-card__about {
+  width: 100%;
+  margin-top: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 20px;
+}
+
+.detailed-card__left-side {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.detailed-card__right-side {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.detailed-card__name {
+  font-size: 25px;
+}
