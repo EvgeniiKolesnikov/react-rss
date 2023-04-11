@@ -1,4 +1,3 @@
-import Cards from 'components/Cards/Cards';
 import Header from 'components/Header/Header';
 import SearchBar from 'components/SearchBar/SearchBar';
 import './Home.scss';
@@ -8,7 +7,6 @@ export default function Home() {
     <>
       <Header name="Home" />
       <SearchBar />
-      <Cards />
     </>
   );
 }
