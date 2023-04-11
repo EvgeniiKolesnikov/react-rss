@@ -6,6 +6,5 @@ import { sampleCardsArray } from 'data/samples';
 test('Cards rendered', () => {
   render(<Cards cards={sampleCardsArray} />);
   const card = screen.getAllByText('Investigator Rick');
-  screen.debug();
   expect(card[0]).toBeInTheDocument();
 });

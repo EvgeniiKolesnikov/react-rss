@@ -21,4 +21,4 @@ export const sampleCard: CardType = {
   created: '2017-12-29T17:05:15.514Z',
 };
 
-export const sampleCardsArray: CardType[] = [sampleCard, sampleCard, sampleCard];
+export const sampleCardsArray: CardType[] = [sampleCard];
