@@ -1,11 +1,15 @@
+import { CardType } from 'types/api';
 import './Cards.scss';
-import CardsData, { cardType } from '../../data/CardsData';
 import Card from 'components/Card/Card';
 
-export default function Cards() {
+type Cards = {
+  cards: CardType[];
+};
+
+export default function Cards({ cards }: Cards) {
   return (
     <div className="cards">
-      {CardsData.map((card: cardType) => (
+      {cards.map((card: CardType) => (
         <Card key={card.id} {...card} />
       ))}
     </div>

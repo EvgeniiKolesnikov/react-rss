@@ -3,7 +3,7 @@ import Cards from './Cards';
 import '@testing-library/jest-dom';
 
 test('Cards rendered', () => {
-  render(<Cards />);
+  render(<Cards cards={[]} />);
   const cards = screen.queryByText('cards');
   expect(cards).not.toBeInTheDocument();
 });
