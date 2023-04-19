@@ -2,13 +2,22 @@ import Form from 'components/Form/Form';
 import FormCards from 'components/FormCards/FormCards';
 import FormSubmitMessage from 'components/FormSubmitMessage/FormSubmitMessage';
 import Header from 'components/Header/Header';
+import { addFormCard } from 'redux/formCardsSlice';
 import { FormCardType } from 'components/FormCard/FormCard';
-import { useState } from 'react';
+import { useAppDispatch, useAppSelector } from 'redux/hooks';
+import { useEffect, useState } from 'react';
 import './FormPage.scss';
 
 export default function FormPage() {
+  const formCards = useAppSelector((state) => state.formCards.formCards);
+  const dispatch = useAppDispatch();
+
   const [isShowMessage, setIsShowMessage] = useState<boolean>(false);
-  const [cards, setCards] = useState<FormCardType[]>([]);
+  const [cards, setCards] = useState<FormCardType[]>(formCards);
+
+  useEffect(() => {
+    setCards(formCards);
+  }, [formCards]);
 
   function showSubmitMessage(): void {
     setIsShowMessage(true);
@@ -18,7 +27,7 @@ export default function FormPage() {
   }
 
   function updateCards(newCard: FormCardType) {
-    setCards((prevCards) => [...prevCards, newCard]);
+    dispatch(addFormCard(newCard));
     showSubmitMessage();
   }
 
