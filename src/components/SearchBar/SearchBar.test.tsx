@@ -1,30 +1,48 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import SearchBar from './SearchBar';
-import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { Provider } from 'react-redux';
+import { store } from 'redux/store';
+import '@testing-library/jest-dom';
 
 describe('SearchBar component', () => {
   it('SearchBar placeholder', () => {
-    render(<SearchBar />);
+    render(
+      <Provider store={store}>
+        <SearchBar />
+      </Provider>
+    );
     const SearchBarElement = screen.getByPlaceholderText(/Search.../i);
     expect(SearchBarElement).toBeInTheDocument();
   });
 
   it('SearchBar title', () => {
-    render(<SearchBar />);
+    render(
+      <Provider store={store}>
+        <SearchBar />
+      </Provider>
+    );
     const SearchBarElement = screen.getByTitle('search-bar');
     expect(SearchBarElement).toBeInTheDocument();
   });
 
   it('SearchBar input', () => {
-    render(<SearchBar />);
+    render(
+      <Provider store={store}>
+        <SearchBar />
+      </Provider>
+    );
     const SearchBarElement = screen.getByTitle<HTMLInputElement>('search-bar');
     fireEvent.change(SearchBarElement, { target: { value: 'Lebron James' } });
     expect(SearchBarElement.value).toEqual('Lebron James');
   });
 
   it('loads and displays API', async () => {
-    render(<SearchBar />);
+    render(
+      <Provider store={store}>
+        <SearchBar />
+      </Provider>
+    );
     const SearchBarElement = screen.getByTitle<HTMLInputElement>('search-bar');
     fireEvent.change(SearchBarElement, { target: { value: 'Rick' } });
     userEvent.click(SearchBarElement);
