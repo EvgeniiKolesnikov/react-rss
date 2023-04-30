@@ -1,0 +1,19 @@
+.card {
+  width: 140px;
+  margin: 20px;
+  opacity: 1;
+  transition: 0.2s ease-in-out;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.card__image {
+  border-radius: 5px;
+  height: 140px;
+}
+
+.card__name {
+  color: gray;
+}
